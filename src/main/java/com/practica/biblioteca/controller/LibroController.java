@@ -12,6 +12,7 @@ import java.util.List;
 
 //permite que la clase sea un servicio expuesto indicándole el path
 @RestController(value = "/libro")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class LibroController {
     @Autowired
     LibroService libroService;

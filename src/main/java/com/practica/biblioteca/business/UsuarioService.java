@@ -46,4 +46,8 @@ public class UsuarioService {
         }
         throw new NoAutorizado("Usuario no autorizado para eliminar usuario");
     }
+
+    public Usuario login(String nombreUsuario, String passWord) {
+        return usuarioPersistance.login(nombreUsuario, passWord);
+    }
 }

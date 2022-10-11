@@ -10,6 +10,7 @@ import java.util.List;
 
 //permite que la clase sea un servicio expuesto indicándole el path
 @RestController(value = "usuario")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class UsuarioController {
 
     @Autowired
@@ -39,6 +40,12 @@ public class UsuarioController {
     @DeleteMapping("usuario/delete/{id}")
     public boolean eliminarUsuarioPorId(@PathVariable("id") Long id, @RequestHeader("tipo") int tipo) throws NoAutorizado {
         return usuarioService.eliminarUsuarioPorId(tipo, id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:5500")
+    @PostMapping ("index.html/{nombreUsuario}/{passWord}")
+    public Usuario login(@PathVariable("nombreUsuario") String nombreUsuario, @PathVariable("passWord") String passWord) {
+        return usuarioService.login(nombreUsuario, passWord);
     }
 
 }

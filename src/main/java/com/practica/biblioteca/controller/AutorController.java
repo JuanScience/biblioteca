@@ -4,13 +4,13 @@ package com.practica.biblioteca.controller;
 import com.practica.biblioteca.business.AutorService;
 import com.practica.biblioteca.exeption.NoAutorizado;
 import com.practica.biblioteca.model.entitys.Autor;
-import com.practica.biblioteca.model.entitys.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController(value = "autor")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class AutorController {
     @Autowired
     AutorService autorService;
