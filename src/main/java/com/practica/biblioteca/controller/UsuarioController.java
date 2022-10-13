@@ -43,8 +43,8 @@ public class UsuarioController {
     }
 
     @CrossOrigin(origins = "http://localhost:5500")
-    @PostMapping ("index.html/{nombreUsuario}/{passWord}")
-    public Usuario login(@PathVariable("nombreUsuario") String nombreUsuario, @PathVariable("passWord") String passWord) {
+    @PostMapping ("{nombreUsuario}/{passWord}")
+    public Usuario login(@PathVariable String nombreUsuario, @PathVariable String passWord) {
         return usuarioService.login(nombreUsuario, passWord);
     }
 

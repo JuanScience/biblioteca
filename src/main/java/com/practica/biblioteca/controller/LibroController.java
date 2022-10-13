@@ -18,10 +18,10 @@ public class LibroController {
     LibroService libroService;
 
     //permite que el controlador exponga metodo get para hacer consultas con el path especificado
-    @GetMapping("/isbn/{isbn}")
-    public Libro obtenerLibroPorISBN(@PathVariable("isbn") String isbn, @RequestHeader("tipo") int tipo) {
-        //aca va el llamado al service que valida y pide a la BD el libro.
-        return libroService.obtenerLibroPorIsbn(tipo, isbn);
+    @GetMapping("/id_Autor/{idAutor}")
+    public List<Libro> obtenerLibroPorIdAutor(@PathVariable("idAutor") Long idAutor) {
+        //aca va el llamado al service que valida y pide a la BD los libros.
+        return libroService.obtenerLibroPorIdAutor(idAutor);
     }
 
     //permite que el controlador exponga metodo get para hacer consultas con el path especificado

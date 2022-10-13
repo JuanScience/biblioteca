@@ -16,8 +16,8 @@ public class LibroService {
     @Autowired
     private AutorService autorService;
 
-    public Libro obtenerLibroPorIsbn(int tipo, String isbn) {
-        return libroPersistance.findByIsbn(isbn);
+    public List<Libro> obtenerLibroPorIdAutor(Long idAutor) {
+        return libroPersistance.findByIdAutor(idAutor);
     }
 
     public boolean eliminarLibroPorId(int tipo, Long id) throws NoAutorizado {

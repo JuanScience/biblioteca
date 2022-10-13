@@ -40,4 +40,11 @@ public class AutorController {
     public boolean eliminarAutorPorId(@PathVariable("id") Long id, @RequestHeader("tipo") int tipo) throws NoAutorizado {
         return autorService.eliminarAutorPorId(tipo, id);
     }
+
+    //permite que el controlador exponga metodo get para hacer consultas con el path especificado
+    @GetMapping("/cedula/{cedula}")
+    public Autor obtenerAutorPorCedula(@PathVariable("cedula") String cedula) {
+        //aca va el llamado al service que valida y pide a la BD el libro.
+        return autorService.obtenerAutorPorCedula(cedula);
+    }
 }

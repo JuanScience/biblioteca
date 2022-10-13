@@ -50,4 +50,8 @@ public class AutorService {
         }
         throw new NoAutorizado("Usuario no autorizado para eliminar autor");
     }
+
+    public Autor obtenerAutorPorCedula(String cedula) {
+        return autorPersistance.findByCedula(cedula);
+    }
 }
