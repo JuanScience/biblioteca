@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController(value = "autor")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
 public class AutorController {
     @Autowired
     AutorService autorService;
@@ -32,7 +32,7 @@ public class AutorController {
     }
 
     @PutMapping("autor/update")
-    public Autor actualizarAutor(@RequestBody Autor autor, int tipo) throws NoAutorizado {
+    public Autor actualizarAutor(@RequestBody Autor autor, @RequestHeader int tipo) throws NoAutorizado {
         return autorService.actualizarAutor(tipo, autor);
     }
 
