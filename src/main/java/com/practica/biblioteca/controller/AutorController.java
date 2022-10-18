@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController(value = "autor")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,
+        RequestMethod.DELETE})
 public class AutorController {
     @Autowired
     AutorService autorService;
@@ -42,9 +43,9 @@ public class AutorController {
     }
 
     //permite que el controlador exponga metodo get para hacer consultas con el path especificado
-    @GetMapping("/cedula/{cedula}")
-    public Autor obtenerAutorPorCedula(@PathVariable("cedula") String cedula) {
+    @GetMapping("autor/buscar/{cc}")
+    public Autor obtenerAutorPorCedula(@PathVariable("cc") String cc) {
         //aca va el llamado al service que valida y pide a la BD el libro.
-        return autorService.obtenerAutorPorCedula(cedula);
+        return autorService.obtenerAutorPorCedula(cc);
     }
 }

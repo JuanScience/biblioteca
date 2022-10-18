@@ -11,24 +11,36 @@ import java.time.LocalDate;
 import java.util.List;
 
 //permite que la clase sea un servicio expuesto indicándole el path
-@RestController(value = "/libro")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+@RestController(value = "libro")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,
+        RequestMethod.DELETE})
 public class LibroController {
     @Autowired
     LibroService libroService;
 
     //permite que el controlador exponga metodo get para hacer consultas con el path especificado
-    @GetMapping("/id_Autor/{idAutor}")
-    public List<Libro> obtenerLibroPorIdAutor(@PathVariable("idAutor") Long idAutor) {
-        //aca va el llamado al service que valida y pide a la BD los libros.
-        return libroService.obtenerLibroPorIdAutor(idAutor);
+    @GetMapping("libros")
+    public List<Libro> obtenerLibros() {
+        return libroService.obtenerLibros();
+    }
+
+    @PostMapping("libro/create/{genero}/{editorial}/{isbn}/{year}/{idAutor}")
+    public Libro crearLibro(
+            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate year,
+            @PathVariable String isbn,
+            @PathVariable String editorial,
+            @PathVariable String genero,
+            @PathVariable Long idAutor,
+            @RequestHeader int tipo
+    ) throws NoAutorizado {
+        return libroService.crearLibro(tipo, isbn, genero, editorial, year, idAutor);
     }
 
     //permite que el controlador exponga metodo get para hacer consultas con el path especificado
-    @GetMapping("/libro/{nombre}")
-    public List<Libro> obtenerLibroPorAuthor(@PathVariable("nombre") String nombre, @RequestHeader("tipo") int tipo) {
-        //aca va el llamado al service que valida y pide a la BD el libro.
-        return null;
+    @GetMapping("id_Autor/{idAutor}")
+    public List<Libro> obtenerLibroPorIdAutor(@PathVariable("idAutor") Long idAutor) {
+        //aca va el llamado al service que valida y pide a la BD los libros.
+        return libroService.obtenerLibroPorIdAutor(idAutor);
     }
 
     @DeleteMapping("id/{id}")
@@ -36,27 +48,11 @@ public class LibroController {
         return libroService.eliminarLibroPorId(tipo, id);
     }
 
-    @PostMapping("libro/create/{genero}/{editorial}/{isbn}/{year}/{autor}")
-    public Libro crearLibro(
-            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate year,
-            @PathVariable("isbn") String ibns,
-            @PathVariable String editorial,
-            @PathVariable String genero,
-            @PathVariable Long autor,
-            @RequestHeader("tipo") int tipo
-    ) throws NoAutorizado {
-        return libroService.crearLibro(tipo, ibns, genero, editorial, year, autor);
-    }
-
     @PutMapping("libro/update")
     public Libro actualizarLibro(@RequestBody Libro libro, @RequestHeader() int tipo) throws NoAutorizado {
         return libroService.actualizarLibro(tipo, libro);
     }
 
-    //permite que el controlador exponga metodo get para hacer consultas con el path especificado
-    @GetMapping("/libros")
-    public List<Libro> obtenerLibros() {
-        return libroService.obtenerLibros();
-    }
+
 
 }
