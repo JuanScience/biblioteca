@@ -10,7 +10,7 @@ import java.util.List;
 
 //permite que la clase sea un servicio expuesto indicándole el path
 @RestController(value = "usuario")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 public class UsuarioController {
 
     @Autowired
