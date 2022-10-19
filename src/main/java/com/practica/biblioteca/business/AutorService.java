@@ -52,6 +52,10 @@ public class AutorService {
     }
 
     public Autor obtenerAutorPorCedula(String cedula) {
-        return autorPersistance.findByCedula(cedula);
+        try{
+            return autorPersistance.findByCedula(cedula);
+        }catch (Exception e){
+            return null;
+        }
     }
 }

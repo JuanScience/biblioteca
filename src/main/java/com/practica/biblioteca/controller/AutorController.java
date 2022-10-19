@@ -43,9 +43,9 @@ public class AutorController {
     }
 
     //permite que el controlador exponga metodo get para hacer consultas con el path especificado
-    @GetMapping("autor/buscar/{cc}")
-    public Autor obtenerAutorPorCedula(@PathVariable("cc") String cc) {
+    @GetMapping("autor/buscar/{cedula}")
+    public Autor obtenerAutorPorCedula(@PathVariable("cedula") String cedula) {
         //aca va el llamado al service que valida y pide a la BD el libro.
-        return autorService.obtenerAutorPorCedula(cc);
+        return autorService.obtenerAutorPorCedula(cedula);
     }
 }
